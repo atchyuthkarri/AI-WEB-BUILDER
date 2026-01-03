@@ -1,6 +1,6 @@
-import React, { useState } from 'react'
+import React, { useState,useEffect } from 'react'
 import type { Project } from '../types';
-import { Loader, Loader2Icon, PlusIcon } from 'lucide-react';
+import { Loader2Icon, PlusIcon } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
 const MyProjects = () => {
@@ -10,7 +10,10 @@ const MyProjects = () => {
   const navigate = useNavigate()
 
   const fetchProjects = async()=>{
-
+      //simulate  Loading 
+      setTimeout(()=>{
+        setLoading(false)
+      },1000)
   }
     useEffect(()=>{
       fetchProjects()
@@ -18,9 +21,9 @@ const MyProjects = () => {
   return (
     <>
     <div className='px-4 md:px-16 lg-px24 xl:px-32'>
-      {loading ?(
+      {loading ? (
         <div className='flex items-center justify-center h-[80vh]'>
-          <Loader2Icon className='size-7 animate-spin text-indigo-200'/>
+          <Loader2Icon className="w-7 h-7 animate-spin text-indigo-500" />
         </div>
       ) : projects.length > 0 ? (
         <div className='py-10 min-h-[80vh]'>
@@ -31,12 +34,12 @@ const MyProjects = () => {
           </div>
         </div>
       ) : (<div className= 'flex flex-col items-center justify-center h-[80vh]'>
-          <h1 className='text-3xl font-semibold text-gray-300'>
-            You have no projects yet!
-            <button onClick={()=>navigate("/")} className='text-white px-5 py-2 mt-5 rounded-md bg-indigo-500 hover:bg-indigo-600 active:scale-95 transition-all'>
-              Create New
-            </button>
-          </h1>
+            <h1 className='text-3xl font-semibold text-gray-300'>
+              You have no projects yet!
+              <button onClick={()=>navigate("/")} className='text-white px-5 py-2 mt-5 rounded-md bg-indigo-500 hover:bg-indigo-600 active:scale-95 transition-all'>
+                Create New
+              </button>
+            </h1>
       </div>)}
 
     </div>
